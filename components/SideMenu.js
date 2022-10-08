@@ -20,10 +20,8 @@ export const SideMenu = () => {
         height="800px"
         borderRadius="20px"
         flexDirection="column"
-        alignItems="center"
+        alignItems="top"
         bgColor="#FFF"
-        mt="35px"
-        ml="20px"
         boxShadow="md"
         p="md"
       >
