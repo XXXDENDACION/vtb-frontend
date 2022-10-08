@@ -22,6 +22,7 @@ export const SideMenu = () => {
     <>
       <Flex
         width="265px"
+        minWidth="265px"
         height="800px"
         borderRadius="20px"
         flexDirection="column"
