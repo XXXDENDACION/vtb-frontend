@@ -1,12 +1,22 @@
-import { Flex } from "@chakra-ui/react";
 import React from "react";
-import { SideMenu } from "../../components/SideMenu";
+import { Box, Flex, SimpleGrid } from "@chakra-ui/react";
+import { StatsWrapper } from "../../components/Profile/StatsWrapper";
 
 const ProfilePage = () => {
   return (
-    <Flex bgColor="#F7FAFC" height="100vh" width="100%">
-      <SideMenu />
-    </Flex>
+    <SimpleGrid
+        h='100%'
+        w='100%'
+        columns={2}
+        spacing={10}
+    >
+        <Box w='100%' h='100%'>
+
+        </Box>
+        <Box w='400px' h='100%'>
+            <StatsWrapper />
+        </Box>
+    </SimpleGrid>
   );
 };
 
