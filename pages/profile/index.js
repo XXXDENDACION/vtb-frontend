@@ -1,6 +1,6 @@
 import { Flex } from "@chakra-ui/react";
 import React from "react";
-import { SideMenu } from "../../components/side-menu/side-menu";
+import { SideMenu } from "../../components/SideMenu";
 
 const ProfilePage = () => {
   return (
