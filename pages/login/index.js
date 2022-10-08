@@ -11,11 +11,24 @@ import {
 } from "@chakra-ui/react";
 
 import "@chakra-ui/react";
+import { signIn, SignIn } from 'next-auth/react';
 
 import { useState } from "react";
+import { useRouter } from "next/router";
 
 const LoginPage = () => {
-  const [firstNameInput, setFirstNameInput] = useState("");
+  const [privateKeyInput, setPrivateKeyInput] = useState("");
+
+  const handleSignIn = async () => {
+    try {
+      const res = await signIn('credentials', {
+        privateKey: privateKeyInput
+      });
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
 
   return (
     <Flex alignItems="center" justifyContent="center" height="100vh">
@@ -49,8 +62,8 @@ const LoginPage = () => {
         <Flex flexDirection="column">
           <FormControl>
             <Input
-              value={firstNameInput}
-              onChange={(e) => setFirstNameInput(e.target.value)}
+              value={privateKeyInput}
+              onChange={(e) => setPrivateKeyInput(e.target.value)}
               placeholder="Твой персональный ключ"
               type="text"
               border="none"
@@ -62,8 +75,8 @@ const LoginPage = () => {
               lineHeight="150%"
               mb="16px"
             />
-            {firstNameInput === "" ? (
-              <FormErrorMessage>Введите имя</FormErrorMessage>
+            {privateKeyInput === "" ? (
+              <FormErrorMessage>Введите ключ</FormErrorMessage>
             ) : null}
           </FormControl>
         </Flex>
@@ -79,6 +92,7 @@ const LoginPage = () => {
           fontWeight="700"
           lineHeight=""
           _hover="none"
+          onClick={handleSignIn}
         >
           Войти
         </Button>
