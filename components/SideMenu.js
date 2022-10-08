@@ -30,7 +30,7 @@ export const SideMenu = () => {
         </Flex>
         <Image src="/underline.svg" width={233} height={1} alt="" />
 
-        <Flex flexDirection="column" mt="22px">
+        <Flex flexDirection="column" mt="22px" p="0 15px">
           {navItems.map((item) => (
             <MenuItem
               key={item.title}

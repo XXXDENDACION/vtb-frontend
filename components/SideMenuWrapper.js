@@ -12,7 +12,7 @@ export const SideMenuWrapper = ({ children }) => {
             display="flex"
             alignItems="start"
             h='100%'
-            p='50px 0 0 20px'
+            p='25px 20px 0 20px'
         >
             {isShowSidebar && <SideMenu />}
             {children}

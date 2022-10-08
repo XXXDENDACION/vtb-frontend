@@ -9,7 +9,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
     <SessionProvider session={session}>
       <ChakraProvider>
         <RecoilRoot>
-            <Box backgroundColor="#F7FAFC" h='100vh'>
+            <Box backgroundColor="#F7FAFC" height="100%">
                 <SideMenuWrapper>
                     <Component {...pageProps} />
                 </SideMenuWrapper>

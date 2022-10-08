@@ -4,19 +4,19 @@ import { Box, SimpleGrid, Text } from "@chakra-ui/react";
 
 export const Inventory = () => {
     const items = [
-        {img: '', title: 'Шлем', power: 5},
-        {img: '', title: 'Броня', power: 5},
-        {img: '', title: 'Оружие 1', power: 5},
-        {img: '', title: 'Оружие 2', power: 5}
+        {img: '/empty-weapon.png', title: 'Шлем', power: 5},
+        {img: '/empty-weapon.png', title: 'Броня', power: 5},
+        {img: '/empty-weapon.png', title: 'Оружие 1', power: 5},
+        {img: '/empty-weapon.png', title: 'Оружие 2', power: 5}
     ];
 
     return (
-        <Box mt="30px">
+        <Box mt="25px">
             <Text
                 fontSize="lg"
                 fontWeight="700"
                 color="#2D3748"
-                mb="24px"
+                mb="15px"
                 ml="15px"
             >
                 Инвентарь
@@ -30,21 +30,22 @@ export const Inventory = () => {
                 <SimpleGrid
                     columns={2}
                     spacing={20}
+                    gridRowGap="20px"
                 >
                     {items.map(i => (
                         <Box
                             key={i.title}
+                            textAlign="center"
                         >
                             <Box
                                 display="flex"
                                 flexDirection="column"
                                 alignItems="center"
-                                mb="12px"
                             >
                                 <Image
                                     src={i.img}
-                                    width={100}
-                                    height={100}
+                                    width={80}
+                                    height={80}
                                 />
                             </Box>
                             <Text
@@ -59,7 +60,7 @@ export const Inventory = () => {
                                 fontWeight="500"
                                 color="#C53030"
                             >
-                                {i.power}
+                                +{i.power} к силе
                             </Text>
                         </Box>
                     ))}

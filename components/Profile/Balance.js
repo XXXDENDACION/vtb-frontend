@@ -9,7 +9,7 @@ export const Balance = () => {
             spacing={10}
         >
             <Box
-               padding="15px 15px 25px 15px"
+               padding="8px"
                backgroundColor="white"
                boxShadow="md"
                borderRadius="20px"
@@ -30,7 +30,7 @@ export const Balance = () => {
                 </Text>
             </Box>
             <Box
-                padding="15px 15px 25px 15px"
+                padding="8px"
                 backgroundColor="white"
                 boxShadow="md"
                 borderRadius="20px"

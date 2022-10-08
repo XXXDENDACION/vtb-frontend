@@ -4,34 +4,29 @@ import { Text, Flex, Image } from "@chakra-ui/react";
 export const Character = ({ power }) => {
   return (
     <Flex flexDirection="column" mt="30px">
-      <Text fontWeight="700" mb="24px" ml="19px">
-        Персонаж
-      </Text>
       <Flex
-        bgColor="#FFF"
-        width="588px"
-        height={604}
+        height="700px"
         borderRadius="20px"
         position="relative"
         justifyContent="center"
       >
-        <Flex p="42px 0 107px 0">
+        <Flex justifyContent="center">
           <Image src="/character.png" alt="" />
         </Flex>
         <Image
           src="/sword.svg"
           alt=""
           position="absolute"
-          bottom="42px"
-          left="44px"
+          bottom="-50px"
+          left="-50px"
           width={164}
           height={164}
         />
         <Image src="" alt="" />
         <Flex
           position="absolute"
-          bottom="30px"
-          right="104px"
+          bottom="-70px"
+          right="50px"
           alignItems="center"
         >
           <Text fontSize="40px" lineHeight="56px">
