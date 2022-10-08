@@ -3,8 +3,6 @@ import { Text } from "@chakra-ui/react";
 import { Image, Flex } from "@chakra-ui/react";
 
 export const PageTitle = ({ icon, title, iconWidth, iconHeight, fontSize }) => {
-  console.log({ icon, title, iconWidth, iconHeight, fontSize });
-
   return (
     <Flex position="relative" alignItems="center" height={iconHeight}>
       <Image
