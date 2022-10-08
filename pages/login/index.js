@@ -11,19 +11,22 @@ import {
 } from "@chakra-ui/react";
 
 import "@chakra-ui/react";
-import { signIn, SignIn } from 'next-auth/react';
+import { signIn } from 'next-auth/react';
 
 import { useState } from "react";
 import { useRouter } from "next/router";
 
 const LoginPage = () => {
+  const { callbackUrl }  = useRouter().query;
   const [privateKeyInput, setPrivateKeyInput] = useState("");
 
   const handleSignIn = async () => {
     try {
-      const res = await signIn('credentials', {
-        privateKey: privateKeyInput
+      await signIn('credentials', {
+        privateKey: privateKeyInput,
+        callbackUrl: callbackUrl || '/'
       });
+
     } catch (e) {
       console.log(e)
     }

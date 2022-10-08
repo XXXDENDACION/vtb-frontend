@@ -13,7 +13,6 @@ export const authOptions = {
                 privateKey: { label: "Private Key", type: "text"}
             },
             async authorize(credentials, req) {
-                console.log("TEST");
                 const payload = {
                     privateKey: credentials?.privateKey
                 }
@@ -29,7 +28,6 @@ export const authOptions = {
                 })
 
                 const user = await res.json();
-                console.log(user);
                 if(res.ok && user) {
                     return user;
                 }
@@ -57,17 +55,16 @@ export const authOptions = {
             session.user.accessToken = token.accessToken;
             return session;
         },
-        async redirect({ url, baseUrl }) {
-            // if (url !== baseUrl) {
-            //     console.log(new URL(url));
-            // }
-            const callbackUrl = new URL(url).searchParams.get('callbackUrl');
-            if (callbackUrl) {
-                console.log(baseUrl + callbackUrl);
-                return baseUrl + callbackUrl;
-            }
-            return url;
-        }
+        // async redirect({ url, baseUrl }) {
+        //     // if (url !== baseUrl) {
+        //     //     console.log(new URL(url));
+        //     // }
+        //     // const callbackUrl = new URL(url).searchParams.get('callbackUrl');
+        //     // if (callbackUrl) {
+        //     //     return baseUrl + callbackUrl;
+        //     // }
+        //     return url;
+        // }
     }
 }
 export default NextAuth(authOptions)
