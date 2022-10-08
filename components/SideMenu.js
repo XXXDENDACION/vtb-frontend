@@ -1,18 +1,22 @@
 import React, { useState } from "react";
-import { Flex, Text } from "@chakra-ui/react";
+import { Flex, Link, Text } from "@chakra-ui/react";
 import Image from "next/image";
 
 const navItems = [
-  { icon: "/coat.svg", title: "Персонаж" },
-  { icon: "/arch.svg", title: "Задания" },
-  { icon: "/case.svg", title: "Инвентарь" },
-  { icon: "/book.svg", title: "Достижения" },
-  { icon: "/cristal.svg", title: "Магазин" },
-  { icon: "/axe.svg", title: "Сражения" },
+  { icon: "/coat.svg", title: "Персонаж", link: "profile" },
+  { icon: "/arch.svg", title: "Задания", link: "events" },
+  { icon: "/case.svg", title: "Инвентарь", link: "inventory" },
+  { icon: "/book.svg", title: "Достижения", link: "achievements" },
+  { icon: "/cristal.svg", title: "Магазин", link: "shop" },
+  { icon: "/lance.svg", title: "Торговля", link: "marketplace" },
+  { icon: "/axe.svg", title: "Сражения", link: "buttles" },
 ];
 
 export const SideMenu = () => {
-  const [activeTab, setActiveTab] = useState("Персонаж");
+  const [activeTab, setActiveTab] = useState({
+    name: "Персонаж",
+    link: "profile",
+  });
   return (
     <>
       <Flex
@@ -25,12 +29,12 @@ export const SideMenu = () => {
         boxShadow="md"
         p="md"
       >
-        <Flex justifyContent="center" mt="24px" mb="10px">
+        <Flex justifyContent="center" mt={24} mb={10}>
           <Image src="/logo.svg" width={190} height={50} alt="" />
         </Flex>
         <Image src="/underline.svg" width={233} height={1} alt="" />
 
-        <Flex flexDirection="column" mt="22px">
+        <Flex flexDirection="column" mt={22}>
           {navItems.map((item) => (
             <MenuItem
               key={item.title}
@@ -46,39 +50,41 @@ export const SideMenu = () => {
   );
 };
 
-const MenuItem = ({ icon, title, active, activeTab, setActiveTab }) => {
+const MenuItem = ({ icon, title, active, activeTab, setActiveTab, link }) => {
   return (
-    <Flex
-      cursor="pointer"
-      width="220px"
-      height="54px"
-      alignItems="center"
-      p="17px 0 17px 28px"
-      _hover={{
-        opacity: 0.7,
-      }}
-      boxShadow={`${active ? "md" : ""}`}
-      borderRadius="8px"
-      onClick={() => {
-        setActiveTab(title);
-        console.log(activeTab);
-      }}
-    >
-      <Image
-        src={icon}
-        width={20}
-        height={20}
-        alt=""
-        color={`${active ? "#3A83F1" : "#322659"}`}
-      />
-      <Text
-        color={`${active ? "#3A83F1" : "#322659"}`}
-        ml="17px"
-        fontSize="14px"
-        fontWeight="600"
+    <Link href={`/${link}`} _hover={{ textDecoration: "none" }}>
+      <Flex
+        cursor="pointer"
+        width={220}
+        height={54}
+        alignItems="center"
+        p="17px 0 17px 28px"
+        _hover={{
+          opacity: 0.7,
+        }}
+        boxShadow={`${active ? "md" : ""}`}
+        borderRadius={8}
+        onClick={() => {
+          setActiveTab(title);
+          console.log(activeTab);
+        }}
       >
-        {title}
-      </Text>
-    </Flex>
+        <Image
+          src={icon}
+          width={20}
+          height={20}
+          alt=""
+          color={`${active ? "#3A83F1" : "#322659"}`}
+        />
+        <Text
+          color={`${active ? "#3A83F1" : "#322659"}`}
+          ml={17}
+          fontSize={14}
+          fontWeight={600}
+        >
+          {title}
+        </Text>
+      </Flex>
+    </Link>
   );
 };
