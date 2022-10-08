@@ -1,24 +1,22 @@
 import React from "react";
-import { Flex } from "@chakra-ui/react";
-import { PageTitle } from "../../components/PageTitle";
-import { Character } from "../../components/Character";
+import { Box, Flex, SimpleGrid } from "@chakra-ui/react";
+import { StatsWrapper } from "../../components/Profile/StatsWrapper";
 
 const ProfilePage = () => {
   return (
-    <Flex bgColor="#F7FAFC" height="100vh" width="100%">
-      <Flex mt="35px" ml="56px" flexDirection="column">
-        <Flex ml="19px">
-          <PageTitle
-            iconWidth={70}
-            iconHeight={90}
-            title={`Приветствую, ${"Карлен"}`}
-            fontSize="36px"
-            icon="/coat.svg"
-          />
-        </Flex>
-        <Character power={75} />
-      </Flex>
-    </Flex>
+    <SimpleGrid
+        h='100%'
+        w='100%'
+        columns={2}
+        spacing={10}
+    >
+        <Box w='100%' h='100%'>
+
+        </Box>
+        <Box w='400px' h='100%'>
+            <StatsWrapper />
+        </Box>
+    </SimpleGrid>
   );
 };
 

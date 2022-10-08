@@ -8,7 +8,12 @@ export const SideMenuWrapper = ({ children }) => {
     const isShowSidebar = !(router.pathname === '/login') && !(router.pathname === '/register');
 
     return (
-        <Box display="flex" alignItems="center">
+        <Box
+            display="flex"
+            alignItems="start"
+            h='100%'
+            p='50px 0 0 20px'
+        >
             {isShowSidebar && <SideMenu />}
             {children}
         </Box>
