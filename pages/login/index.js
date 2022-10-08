@@ -44,8 +44,8 @@ const LoginPage = () => {
     >
       <Image
         position="absolute"
-        left="0"
-        bottom="0"
+        left={0}
+        bottom={0}
         src="https://i.yapx.cc/UMjzA.png"
         alt=""
       />
@@ -61,26 +61,26 @@ const LoginPage = () => {
       <Flex
         position="absolute"
         bgColor="#F7FAFC"
-        right="360px"
-        padding="40px"
-        borderRadius="16px"
-        width="560px"
+        right={360}
+        padding={40}
+        borderRadius={16}
+        width={560}
         flexDirection="column"
       >
         <Text
           color="#0A2896"
-          fontSize="48px"
+          fontSize={48}
           lineHeight="120%"
-          fontWeight="700"
-          margin="0"
+          fontWeight={700}
+          margin={0}
         >
           Войти
         </Text>
 
         <Text
           color="#718096"
-          fontWeight="500"
-          fontSize="16px"
+          fontWeight={500}
+          fontSize={16}
           lineHeight="150%"
           m="16px 0 25px 0"
         >
@@ -95,14 +95,14 @@ const LoginPage = () => {
               placeholder="Твой персональный ключ"
               type="text"
               border="none"
-              borderRadius="12px"
+              borderRadius={12}
               bgColor="#EDF2F7"
-              width="480px"
-              height="60px"
+              width={480}
+              height={60}
               color="#718096"
-              fontSize="16px"
+              fontSize={16}
               lineHeight="150%"
-              mb="16px"
+              mb={16}
             />
             {privateKeyInput === "" ? (
               <FormErrorMessage>Введите ключ</FormErrorMessage>
@@ -114,13 +114,12 @@ const LoginPage = () => {
           border="none"
           cursor="pointer"
           bgGradient="linear(to-r, blue.600, purple.400 )"
-          padding="18px"
-          borderRadius="12px"
+          padding={18}
+          borderRadius={12}
           color="#FFF"
-          height="57px"
-          fontSize="16px"
-          fontWeight="700"
-          lineHeight=""
+          height={57}
+          fontSize={16}
+          fontWeight={700}
           _hover="none"
           onClick={handleSignIn}
         >
