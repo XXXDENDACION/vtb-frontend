@@ -49,7 +49,6 @@ export const SideMenu = () => {
 };
 
 const MenuItem = ({ icon, title, active, activeTab, setActiveTab }) => {
-  console.log({ active });
   return (
     <Flex
       cursor="pointer"
