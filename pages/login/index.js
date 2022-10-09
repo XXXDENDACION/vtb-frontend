@@ -62,17 +62,17 @@ const LoginPage = () => {
         position="absolute"
         bgColor="#F7FAFC"
         right={360}
-        padding={40}
-        borderRadius={16}
+        padding="40px"
+        borderRadius="16px"
         width={560}
         flexDirection="column"
       >
         <Text
           color="#0A2896"
-          fontSize={48}
+          fontSize="48px"
           lineHeight="120%"
           fontWeight={700}
-          margin={0}
+          margin="0"
         >
           Войти
         </Text>
@@ -80,7 +80,7 @@ const LoginPage = () => {
         <Text
           color="#718096"
           fontWeight={500}
-          fontSize={16}
+          fontSize="16px"
           lineHeight="150%"
           m="16px 0 25px 0"
         >
@@ -95,14 +95,13 @@ const LoginPage = () => {
               placeholder="Твой персональный ключ"
               type="text"
               border="none"
-              borderRadius={12}
+              borderRadius="12px"
               bgColor="#EDF2F7"
-              width={480}
-              height={60}
+              //   width={480}
+              height="60px"
               color="#718096"
-              fontSize={16}
-              lineHeight="150%"
-              mb={16}
+              fontSize="16px"
+              mb="16px"
             />
             {privateKeyInput === "" ? (
               <FormErrorMessage>Введите ключ</FormErrorMessage>
@@ -114,11 +113,11 @@ const LoginPage = () => {
           border="none"
           cursor="pointer"
           bgGradient="linear(to-r, blue.600, purple.400 )"
-          padding={18}
-          borderRadius={12}
+          padding="18px"
+          borderRadius="12px"
           color="#FFF"
           height={57}
-          fontSize={16}
+          fontSize="16px"
           fontWeight={700}
           _hover="none"
           onClick={handleSignIn}

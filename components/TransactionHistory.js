@@ -18,7 +18,7 @@ export const TransactionHistory = ({ title, description }) => {
   };
 
   useEffect(() => {
-    getData();
+    // getData();
   }, []);
   return (
     <Flex
