@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Flex, Text } from "@chakra-ui/react";
 import Link from "next/link";
 import Image from "next/image";
+import { userState } from "../recoil_state";
+import { useRecoilValue } from "recoil";
 
 const navItems = [
   { icon: "/coat.svg", title: "Персонаж", link: "profile" },
@@ -13,11 +15,29 @@ const navItems = [
   { icon: "/axe.svg", title: "Сражения", link: "buttles" },
 ];
 
+const adminNavItems = [
+  { icon: "/coat.svg", title: "Персонаж", link: "profile" },
+  { icon: "/arch.svg", title: "Задания", link: "events" },
+  { icon: "/case.svg", title: "Инвентарь", link: "inventory" },
+  { icon: "/book.svg", title: "Достижения", link: "achievements" },
+  { icon: "/cristal.svg", title: "Магазин", link: "shop" },
+  { icon: "/lance.svg", title: "Торговля", link: "marketplace" },
+  { icon: "/axe.svg", title: "Сражения", link: "buttles" },
+  {
+    icon: "/admin-shield.svg",
+    title: "Панель администратора",
+    link: "admin",
+  },
+];
+
 export const SideMenu = () => {
   const [activeTab, setActiveTab] = useState({
     name: "Персонаж",
     link: "profile",
   });
+
+  const user = useRecoilValue(userState);
+
   return (
     <>
       <Flex
@@ -37,15 +57,25 @@ export const SideMenu = () => {
         <Image src="/underline.svg" width={233} height={1} alt="" />
 
         <Flex flexDirection="column" mt="22px" p="0 15px">
-          {navItems.map((item) => (
-            <MenuItem
-              key={item.title}
-              {...item}
-              active={activeTab === item.title}
-              setActiveTab={setActiveTab}
-              activeTab={activeTab}
-            />
-          ))}
+          {user.role === "admin"
+            ? adminNavItems.map((item) => (
+                <MenuItem
+                  key={item.title}
+                  {...item}
+                  active={activeTab === item.title}
+                  setActiveTab={setActiveTab}
+                  activeTab={activeTab}
+                />
+              ))
+            : navItems.map((item) => (
+                <MenuItem
+                  key={item.title}
+                  {...item}
+                  active={activeTab === item.title}
+                  setActiveTab={setActiveTab}
+                  activeTab={activeTab}
+                />
+              ))}
         </Flex>
       </Flex>
     </>
