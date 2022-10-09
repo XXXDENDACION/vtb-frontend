@@ -17,7 +17,17 @@ export const Inventory = () => {
     ];
 
     const currentItems = useMemo(() => {
+        return items.map(i => {
+            const toReplaceItem = equippedItems.find(o => o.type === i.type);
+            if (toReplaceItem) {
+                return {
+                    ...i,
+                    img:  toReplaceItem.imageUrl,
+                }
+            }
 
+            return i;
+        });
     }, [equippedItems]);
 
     return (
@@ -42,7 +52,7 @@ export const Inventory = () => {
                     spacing={20}
                     gridRowGap="20px"
                 >
-                    {items.map(i => (
+                    {currentItems.map(i => (
                         <Box
                             key={i.title}
                             textAlign="center"
@@ -70,7 +80,7 @@ export const Inventory = () => {
                                 fontWeight="500"
                                 color="#C53030"
                             >
-                                +{i.power} к силе
+                                {i.power && `+${i.power} к силе`}
                             </Text>
                         </Box>
                     ))}

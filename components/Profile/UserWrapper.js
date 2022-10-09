@@ -26,7 +26,11 @@ export const UserWrapper = ({ children }) => {
                 }
             }).then(res => {
                 setEquippedItems(res.data);
+            }).catch(err => {
+                console.log(err);
             })
+        }).catch(err => {
+            console.log(err)
         })
     }, [session]);
 
