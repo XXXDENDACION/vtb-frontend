@@ -15,7 +15,7 @@ const nextConfig = {
     ]
   },
   images: {
-    domains: ['gateway.pinata.cloud'],
+    domains: ['gateway.pinata.cloud', 'rmkr.mypinata.cloud'],
   },
 }
 

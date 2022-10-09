@@ -22,13 +22,17 @@ export const Inventory = () => {
             if (toReplaceItem) {
                 return {
                     ...i,
+                    title: i.title.split('\n')[0],
                     img:  toReplaceItem.imageUrl,
+                    power: toReplaceItem.power
                 }
             }
 
             return i;
         });
     }, [equippedItems]);
+
+    console.log(currentItems);
 
     return (
         <Box mt="25px">
@@ -62,7 +66,7 @@ export const Inventory = () => {
                                 flexDirection="column"
                                 alignItems="center"
                             >
-                                <Image
+                                <img
                                     src={i.img}
                                     width={80}
                                     height={80}

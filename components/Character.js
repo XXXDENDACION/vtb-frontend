@@ -11,14 +11,19 @@ export const Character = ({ power }) => {
         justifyContent="center"
       >
         <Flex justifyContent="center">
-          <Image src="/character.png" alt="" />
+          <Image
+              w="306px"
+              h="448px"
+              src="/character.png"
+              alt=""
+          />
         </Flex>
         <Image
           src="/sword.svg"
           alt=""
           position="absolute"
-          bottom="-50px"
-          left="-50px"
+          bottom="170px"
+          left="-80px"
           width={164}
           height={164}
         />
