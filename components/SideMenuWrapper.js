@@ -7,15 +7,18 @@ export const SideMenuWrapper = ({ children }) => {
     const router = useRouter();
     const isShowSidebar = !(router.pathname === '/login') && !(router.pathname === '/register');
 
-    return (
+    return isShowSidebar ? (
         <Box
             display="flex"
             alignItems="start"
             h='100%'
             p='25px 20px 0 20px'
         >
-            {isShowSidebar && <SideMenu />}
+            <SideMenu />
             {children}
-        </Box>
+        </Box> ) : (
+            <>
+                {children}
+            </>
     )
 }

@@ -1,14 +1,24 @@
-import React from "react";
+import React, { useMemo } from "react";
 import Image from "next/image";
 import { Box, SimpleGrid, Text } from "@chakra-ui/react";
+import { useRecoilValue } from "recoil";
+import { equippedState } from "../../recoil_state";
 
 export const Inventory = () => {
+    const equippedItems = useRecoilValue(equippedState);
+
+    console.log(equippedItems);
+
     const items = [
-        {img: '/empty-weapon.png', title: 'Шлем', power: 5},
-        {img: '/empty-weapon.png', title: 'Броня', power: 5},
-        {img: '/empty-weapon.png', title: 'Оружие 1', power: 5},
-        {img: '/empty-weapon.png', title: 'Оружие 2', power: 5}
+        {img: '/empty-weapon.png', title: 'Шлем\n(Отсутствует)', type: 'helmet'},
+        {img: '/empty-weapon.png', title: 'Броня\n(Отсутствует)', type: 'armor'},
+        {img: '/empty-weapon.png', title: 'Оружие 1\n(Отсутствует)', type: 'weapon'},
+        {img: '/empty-weapon.png', title: 'Оружие 2\n(Отсутствует)', type: 'weapon'}
     ];
+
+    const currentItems = useMemo(() => {
+
+    }, [equippedItems]);
 
     return (
         <Box mt="25px">

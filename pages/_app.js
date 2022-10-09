@@ -1,19 +1,20 @@
-import { Box, ChakraProvider } from "@chakra-ui/react";
+import { ChakraProvider } from "@chakra-ui/react";
 import { SessionProvider } from "next-auth/react";
 import { RecoilRoot } from "recoil";
 import "../styles/globals.css";
 import { SideMenuWrapper } from "../components/SideMenuWrapper";
+import { UserWrapper } from "../components/Profile/UserWrapper";
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   return (
     <SessionProvider session={session}>
       <ChakraProvider>
         <RecoilRoot>
-            <Box backgroundColor="#F7FAFC" height="100%">
+            <UserWrapper>
                 <SideMenuWrapper>
                     <Component {...pageProps} />
                 </SideMenuWrapper>
-            </Box>
+            </UserWrapper>
         </RecoilRoot>
       </ChakraProvider>
     </SessionProvider>

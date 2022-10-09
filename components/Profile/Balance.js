@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, SimpleGrid, Text } from "@chakra-ui/react";
 
-export const Balance = () => {
+export const Balance = ({ id, rub}) => {
 
     return (
         <SimpleGrid
@@ -26,7 +26,7 @@ export const Balance = () => {
                     fontSize='lg'
                     color="#2D3748"
                 >
-                    473265
+                    {id}
                 </Text>
             </Box>
             <Box
@@ -47,7 +47,7 @@ export const Balance = () => {
                     fontSize='lg'
                     color="#2D3748"
                 >
-                    50 Р
+                    {rub} Р
                 </Text>
             </Box>
         </SimpleGrid>

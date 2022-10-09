@@ -55,7 +55,7 @@ function Row({ name, position, power}) {
                     </Text>
                     <Text
                         fontSize="md"
-                        fontWeigt="700"
+                        fontWeight="700"
                     >
                         {name}
                     </Text>
