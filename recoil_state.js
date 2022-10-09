@@ -10,7 +10,13 @@ const equippedState = atom({
     default: []
 })
 
+const itemsState = atom({
+    key: 'ItemList',
+    default: []
+})
+
 export {
     userState,
-    equippedState
+    equippedState,
+    itemsState
 }

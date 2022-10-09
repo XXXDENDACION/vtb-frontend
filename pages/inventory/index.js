@@ -1,12 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Box, SimpleGrid } from "@chakra-ui/react";
 import { PageTitle } from "../../components/PageTitle";
 import { Item } from "../../components/Inventory/Item";
 import { unstable_getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]";
+import { useSetRecoilState } from "recoil";
+import { itemsState } from "../../recoil_state";
 
 const Inventory = (props) => {
+    const setListItems = useSetRecoilState(itemsState);
     const {data} = props;
+
+    useEffect(() => {
+        if (data) {
+            setListItems(data);
+        }
+    }, [data])
+
     return (
         <Box
             h="100%"
@@ -26,7 +36,7 @@ const Inventory = (props) => {
                 overflow="auto"
             >
                 {data.map(i => (
-                    <Item key={i.tokenId} img={i?.imageUrl} power={i.power} type={i.type} />
+                    <Item key={i.tokenId} id={i.tokenId} img={i?.imageUrl} power={i.power} type={i.type} />
                 ))}
             </SimpleGrid>
         </Box>

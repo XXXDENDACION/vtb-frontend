@@ -7,13 +7,11 @@ import { equippedState } from "../../recoil_state";
 export const Inventory = () => {
     const equippedItems = useRecoilValue(equippedState);
 
-    console.log(equippedItems);
-
     const items = [
         {img: '/empty-weapon.png', title: 'Шлем\n(Отсутствует)', type: 'helmet'},
         {img: '/empty-weapon.png', title: 'Броня\n(Отсутствует)', type: 'armor'},
-        {img: '/empty-weapon.png', title: 'Оружие 1\n(Отсутствует)', type: 'weapon'},
-        {img: '/empty-weapon.png', title: 'Оружие 2\n(Отсутствует)', type: 'weapon'}
+        {img: '/empty-weapon.png', title: 'Оружие\n(Отсутствует)', type: 'weapon'},
+        {img: '/empty-weapon.png', title: 'Оружие\n(Отсутствует)', type: 'weapon'}
     ];
 
     const currentItems = useMemo(() => {
