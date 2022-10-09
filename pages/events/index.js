@@ -23,16 +23,16 @@ const EventsPage = () => {
         return newEvents.filter((event) => event.take === true);
       case "done":
         return newEvents.filter(
-          (event) => event.take === true && event.done === true
+          (event) => event?.take === true && event?.done === true
         );
     }
   }, [events, filter]);
 
   const completeEvent = (eventId) => {
     axios
-      .post("http://localhost:3014/event/update", {
+      .post("http://localhost:3014/event/complete", {
         eventId: eventId,
-        userId: user.id,
+        userId: user?.id
       })
       .then(() => {
         setFilter("all");
@@ -70,6 +70,7 @@ const EventsPage = () => {
       });
   }, [session?.data?.user?.accessToken, filter]);
 
+  console.log(filteredEvents);
   return (
     <>
       <Flex flexDirection="column" ml="57px">
@@ -83,12 +84,12 @@ const EventsPage = () => {
         <RadioGroup value={filter} onChange={setFilter}>
           <Stack direction="row">
             <Radio value="all">Все</Radio>
-            <Radio value="taken">Сдано</Radio>
+            <Radio value="taken">В процессе</Radio>
             <Radio value="done">Выполнено</Radio>
           </Stack>
         </RadioGroup>
 
-        {filteredEvents.map((event, index) => (
+        {filteredEvents.sort((a,b) => new Date(b?.createdAt) - new Date(a?.createdAt)).map((event, index) => (
           <Event
             key={index}
             title={event.name}

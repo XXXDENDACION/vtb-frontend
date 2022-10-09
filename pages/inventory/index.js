@@ -53,6 +53,7 @@ export async function getServerSideProps(context) {
     }
     const res = await fetch('http://localhost:3014/items', options);
     const data = await res.json();
+    console.log(data);
 
     return {
         props: {

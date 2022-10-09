@@ -17,35 +17,36 @@ export const Event = ({ title, description, onTake, onComplete, event }) => {
             {description}
           </Text>
         </Flex>
-        {!event.taken ? (
-          <Button
-            borderRadius="15px"
-            bgColor="#1A365D"
-            color="#FFF"
-            height={57}
-            width={222}
-            _hover="none"
-            onClick={() => {
-              onTake(event.id);
-            }}
-          >
-            Принять
-          </Button>
-        ) : event.taken && !event.done ? (
-          <Button
-            borderRadius="15px"
-            bgColor="#1A365D"
-            color="#FFF"
-            height={57}
-            width={222}
-            _hover="none"
-            onClick={() => {
-              onComplete(event.id);
-            }}
-          >
-            Завершить
-          </Button>
-        ) : null}
+        {!event.take && (
+            <Button
+                borderRadius="15px"
+                bgColor="#1A365D"
+                color="#FFF"
+                height={57}
+                width={222}
+                _hover="none"
+                onClick={() => {
+                  onTake(event.id);
+                }}
+            >
+              Принять
+            </Button>
+        )}
+        {(!!event.take && !event.done) && (
+            <Button
+                borderRadius="15px"
+                bgColor="#1A365D"
+                color="#FFF"
+                height={57}
+                width={222}
+                _hover="none"
+                onClick={() => {
+                  onComplete(event.id);
+                }}
+            >
+              Завершить
+            </Button>
+        )}
       </Flex>
       <Flex>
         <Image src="/meetup.png" alt="" ml="30px" />

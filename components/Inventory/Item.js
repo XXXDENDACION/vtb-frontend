@@ -23,29 +23,9 @@ export const Item = ({ id, power, type, img }) => {
     }).catch(err => console.log(error))
   }
 
-  const typeWeaponIsNull = () => {
-    if (!user?.firstWeapon) {
-      return 'firstWeapon';
-    }
-    if (!user?.secondWeapon) {
-      return 'secondWeapon';
-    }
-  }
-
-  const getTypeWeapon = (id) => {
-    if (id === user?.firstWeapon) return 'firstWeapon';
-    if (id === user?.secondWeapon) return 'secondWeapon';
-  }
-
   const handleEquipItem = () => {
-      let suffix;
       if (session?.data?.user?.accessToken) {
-        if (isEquip) {
-            suffix = getTypeWeapon(id);
-        } else {
-            suffix = type === 'weapon' ? typeWeaponIsNull() : type;
-        }
-
+        const suffix = type === 'weapon' ? 'firstWeapon' : type;
         axiosInstance.post('/update', {
           [suffix]: isEquip ? null : id
         }, {

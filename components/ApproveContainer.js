@@ -1,7 +1,52 @@
 import { Flex, Text, Button } from "@chakra-ui/react";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { useRecoilValue } from "recoil";
+import { userState } from "../recoil_state";
+import { useSession } from "next-auth/react";
 
 export const ApproveContainer = () => {
+  const session = useSession();
+  const [events, setEvents] = useState([]);
+
+  const getApprove = () => {
+    if (!session?.data?.user?.accessToken) return;
+
+    axios
+        .get("http://localhost:3014/user-events", {
+          headers: {
+            Authorization: session?.data?.user?.accessToken,
+          },
+        })
+        .then((res) => {
+          setEvents(res.data);
+        }).catch(err => {
+          console.log(err);
+    });
+  }
+
+  const handleApprove = (userId, eventId, approve) => {
+    axios
+        .post("http://localhost:3014/event/approve", {
+          userId: userId,
+          eventId: eventId,
+          approve:  approve,
+        }, {
+          headers: {
+            Authorization: session?.data?.user?.accessToken,
+          },
+        })
+        .then((res) => {
+          getApprove();
+        }).catch(err => {
+      console.log(err);
+    });
+  }
+
+  useEffect(() => {
+    getApprove();
+  }, [session])
+
   return (
     <Flex
       flexDirection="column"
@@ -30,46 +75,24 @@ export const ApproveContainer = () => {
         <Flex></Flex>
       </Flex>
 
-      <UserRow
-        name={"Danil Polienko"}
-        id={12}
-        balance={424}
-        power={32}
-        history=""
-      />
-      <UserRow
-        name={"Danil Polienko"}
-        id={12}
-        balance={424}
-        power={32}
-        history=""
-      />
-      <UserRow
-        name={"Danil Polienko"}
-        id={12}
-        balance={424}
-        power={32}
-        history=""
-      />
-      <UserRow
-        name={"Danil Polienko"}
-        id={12}
-        balance={424}
-        power={32}
-        history=""
-      />
-      <UserRow
-        name={"Danil Polienko"}
-        id={12}
-        balance={424}
-        power={32}
-        history=""
-      />
+      {events?.map(e => (
+          <UserRow
+              key={e.userId}
+              name={"Danil Polienko"}
+              id={12}
+              balance={424}
+              power={32}
+              history=""
+              event={e}
+              handleApprove={handleApprove}
+          />
+      ))}
     </Flex>
   );
 };
 
-const UserRow = ({ name, id }) => {
+const UserRow = ({ event, handleApprove }) => {
+  console.log(event);
   return (
     <>
       <Flex
@@ -85,13 +108,13 @@ const UserRow = ({ name, id }) => {
             minWidth="160px"
             mt="10px"
           >
-            {name}
+            {event?.user?.firstName + ' ' + event?.user?.lastName}
           </Text>
           <Text color="#718096" minWidth="100px" mt="10px">
-            {id}
+            {event?.event?.name}
           </Text>
           <Text color="#718096" minWidth="100px" mt="10px">
-            Митинг
+            {event?.event?.description}
           </Text>
         </Flex>
         <Flex columnGap="30px">
@@ -103,6 +126,7 @@ const UserRow = ({ name, id }) => {
             fontSize="14px"
             _hover="none"
             mt="10px"
+            onClick={() => handleApprove(event?.UserId, event?.EventId, 'accepted')}
           >
             Подтвердить
           </Button>
@@ -115,6 +139,7 @@ const UserRow = ({ name, id }) => {
             fontSize="14px"
             _hover="none"
             mt="10px"
+            onClick={() => handleApprove(event?.UserId, event?.EventId, 'reject')}
           >
             Отклонить
           </Button>
