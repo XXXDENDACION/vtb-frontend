@@ -1,9 +1,75 @@
 import { PageTitle } from "../../components/PageTitle";
-import React from "react";
-import { Flex, Text } from "@chakra-ui/react";
+import React, { useEffect, useState, useMemo, useCallback } from "react";
+import { Flex, RadioGroup, Radio, Stack } from "@chakra-ui/react";
+import { useSession } from "next-auth/react";
+
 import { Event } from "../../components/Event";
+import axios from "axios";
+import { useRecoilValue } from "recoil";
+import { userState } from "../../recoil_state";
 
 const EventsPage = () => {
+  const [events, setEvents] = useState([]);
+  const session = useSession();
+  const user = useRecoilValue(userState);
+  const [filter, setFilter] = useState("all");
+
+  const filteredEvents = useMemo(() => {
+    const newEvents = [...events];
+    switch (filter) {
+      case "all":
+        return newEvents;
+      case "taken":
+        return newEvents.filter((event) => event.take === true);
+      case "done":
+        return newEvents.filter(
+          (event) => event.take === true && event.done === true
+        );
+    }
+  }, [events, filter]);
+
+  const completeEvent = (eventId) => {
+    axios
+      .post("http://localhost:3014/event/update", {
+        eventId: eventId,
+        userId: user.id,
+      })
+      .then(() => {
+        setFilter("all");
+      });
+  };
+
+  const takeEvent = (eventId) => {
+    axios
+      .post("http://localhost:3014/event/take", {
+        eventId: eventId,
+        userId: user.id,
+      })
+      .then(() => {
+        setFilter("all");
+      });
+  };
+
+  useEffect(() => {
+    if (!session?.data?.user?.accessToken) return;
+
+    axios
+      .get("http://localhost:3014/events", {
+        headers: {
+          Authorization: session?.data?.user?.accessToken,
+        },
+      })
+      .then((res) => {
+        if (!res || !res.data) {
+          return;
+        }
+
+        const events = res.data;
+
+        setEvents(events);
+      });
+  }, [session?.data?.user?.accessToken, filter]);
+
   return (
     <>
       <Flex flexDirection="column" ml="57px">
@@ -14,16 +80,25 @@ const EventsPage = () => {
           title="Задания"
           fontSize="18px"
         />
+        <RadioGroup value={filter} onChange={setFilter}>
+          <Stack direction="row">
+            <Radio value="all">Все</Radio>
+            <Radio value="taken">Сдано</Radio>
+            <Radio value="done">Выполнено</Radio>
+          </Stack>
+        </RadioGroup>
 
-        <Event
-          title="Исследования"
-          description="Чтоооооооо за исследование рпарпиа лапвав понятие не имею"
-        />
-
-        <Event
-          title="Митап"
-          description="Чтоооооооо за исследование понятие не имею"
-        />
+        {filteredEvents.map((event, index) => (
+          <Event
+            key={index}
+            title={event.name}
+            description={event.description}
+            onTake={takeEvent}
+            onComplete={completeEvent}
+            event={event}
+            taken={event.taken}
+          />
+        ))}
       </Flex>
     </>
   );

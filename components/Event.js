@@ -1,6 +1,6 @@
 import { Button, Flex, Image, Text } from "@chakra-ui/react";
 
-export const Event = ({ title, description }) => {
+export const Event = ({ title, description, onTake, onComplete, event }) => {
   return (
     <Flex
       bgColor="#FFF"
@@ -17,19 +17,38 @@ export const Event = ({ title, description }) => {
             {description}
           </Text>
         </Flex>
-        <Button
-          borderRadius="15px"
-          bgColor="#1A365D"
-          color="#FFF"
-          height={57}
-          width={222}
-          _hover="none"
-        >
-          Принять
-        </Button>
+        {!event.taken ? (
+          <Button
+            borderRadius="15px"
+            bgColor="#1A365D"
+            color="#FFF"
+            height={57}
+            width={222}
+            _hover="none"
+            onClick={() => {
+              onTake(event.id);
+            }}
+          >
+            Принять
+          </Button>
+        ) : event.taken && !event.done ? (
+          <Button
+            borderRadius="15px"
+            bgColor="#1A365D"
+            color="#FFF"
+            height={57}
+            width={222}
+            _hover="none"
+            onClick={() => {
+              onComplete(event.id);
+            }}
+          >
+            Завершить
+          </Button>
+        ) : null}
       </Flex>
       <Flex>
-        <Image src="/meetup.png" alt="" />
+        <Image src="/meetup.png" alt="" ml="30px" />
       </Flex>
     </Flex>
   );
