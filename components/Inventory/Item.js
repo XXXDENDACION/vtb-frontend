@@ -1,8 +1,7 @@
 import React from "react";
-import Image from "next/image";
 import { Box, Button, Text } from "@chakra-ui/react";
 
-export const Item = () => {
+export const Item = ({ power, type, img }) => {
   return (
       <Box
           backgroundColor="#EDF2F7"
@@ -16,8 +15,8 @@ export const Item = () => {
           maxWidth="230px"
           maxHeight="390"
       >
-          <Image
-            src=""
+          <img
+            src={img}
             height={140}
             width={140}
           />
@@ -26,7 +25,7 @@ export const Item = () => {
               fontWeight="bold"
               color="#718096"
           >
-              Рога Даныча
+              {type}
           </Text>
           <Text
               fontSize="14px"
@@ -34,7 +33,7 @@ export const Item = () => {
               color="#A0AEC0"
               mb="15px"
           >
-              +5 к силе
+              +{power} к силе
           </Text>
           <CustomButton
               colorScheme="facebook"

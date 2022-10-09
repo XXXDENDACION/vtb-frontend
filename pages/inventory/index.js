@@ -2,8 +2,11 @@ import React from "react";
 import { Box, SimpleGrid } from "@chakra-ui/react";
 import { PageTitle } from "../../components/PageTitle";
 import { Item } from "../../components/Inventory/Item";
+import { unstable_getServerSession } from "next-auth";
+import { authOptions } from "../api/auth/[...nextauth]";
 
-const Inventory = () => {
+const Inventory = (props) => {
+    const {data} = props;
     return (
         <Box
             h="100%"
@@ -22,15 +25,30 @@ const Inventory = () => {
                 height="calc(100vh - 150px)"
                 overflow="auto"
             >
-                <Item />
-                <Item />
-                <Item />
-                <Item />
-                <Item />
-                <Item />
+                {data.map(i => (
+                    <Item key={i.tokenId} img={i?.imageUrl} power={i.power} type={i.type} />
+                ))}
             </SimpleGrid>
         </Box>
     )
+}
+
+export async function getServerSideProps(context) {
+    const session = await unstable_getServerSession(context.req, context.res, authOptions);
+    const options = {
+        method: 'GET',
+        headers: {
+            Authorization: session?.user?.accessToken,
+        }
+    }
+    const res = await fetch('http://localhost:3014/items', options);
+    const data = await res.json();
+
+    return {
+        props: {
+            data
+        }, // will be passed to the page component as props
+    }
 }
 
 export default Inventory;
