@@ -31,7 +31,7 @@ export const SideMenu = () => {
         boxShadow="md"
         p="md"
       >
-        <Flex justifyContent="center" mt={24} mb={10}>
+        <Flex justifyContent="center" mt="24px" mb="10px">
           <Image src="/logo.svg" width={190} height={50} alt="" />
         </Flex>
         <Image src="/underline.svg" width={233} height={1} alt="" />
@@ -68,7 +68,6 @@ const MenuItem = ({ icon, title, active, activeTab, setActiveTab, link }) => {
         borderRadius={8}
         onClick={() => {
           setActiveTab(title);
-          console.log(activeTab);
         }}
       >
         <Image
